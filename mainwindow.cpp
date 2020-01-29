@@ -142,7 +142,7 @@ void MainWindow::show_video(){
             float* imgRGBA = NULL;
 
 
-
+               //->NOTE add 1 into the parameter so the data could be available in CPU/GPU shared memory
 
             if( !camera->CaptureRGBA(&imgRGBA, 1000,1) )
                 printf("detectnet-camera:  failed to capture RGBA image from camera\n");
@@ -179,7 +179,8 @@ void MainWindow::show_video(){
 
           // emit returntomain(qt_image);
 
-           ui->label->setPixmap(QPixmap::fromImage(qt_image));
+           ui->label->setPixmap(QPixmap::fromImage(qt_image).scaled(ui->label->size(),
+           Qt::KeepAspectRatio, Qt::FastTransformation));
 
 
           /// cv::imshow("Imshow",dst_img);
